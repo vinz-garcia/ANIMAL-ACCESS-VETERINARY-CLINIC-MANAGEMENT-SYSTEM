@@ -1,73 +1,148 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+<div class="login-page">
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+    <div class="login-left" style="background-image: url('{{ asset('images/vet-login.jpg') }}');">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+        <div class="login-overlay"></div>
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+        <<div class="login-brand">
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+    <div class="login-logo">
+        <img
+            src="{{ asset('images/animal-access-logo.jpg') }}"
+            alt="Animal Access Veterinary Clinic Logo"
+        >
     </div>
+
+    <div>
+        <strong>Animal Access Veterinary Clinic</strong>
+    </div>
+
 </div>
+        <div class="login-quote">
+            <h2>
+                "Caring for your pets<br>
+                with compassion and expertise."
+            </h2>
+
+            <p>
+                Sapang Putol, San Ildefonso, Bulacan
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="login-right">
+
+        <div class="login-form-container">
+
+            <h1>Welcome back</h1>
+
+            <p class="login-subtitle">
+                Sign in to the clinic management system.
+            </p>
+
+            <form method="POST" action="{{ route('login') }}">
+
+                @csrf
+
+                <div class="login-field">
+
+                    <label for="email">
+                        USERNAME
+                    </label>
+
+                    <input
+                        id="email"
+                        type="text"
+                        name="email"
+                        value="{{ old('email') }}"
+                        placeholder="e.g. dr.reyes"
+                        required
+                        autocomplete="email"
+                        autofocus
+                    >
+
+                    @error('email')
+                        <small class="login-error-message">
+                            {{ $message }}
+                        </small>
+                    @enderror
+
+                </div>
+
+
+                <div class="login-field">
+
+                    <label for="password">
+                        PASSWORD
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            id="password"
+                            type="password"
+                            name="password"
+                            placeholder="••••••••"
+                            required
+                            autocomplete="current-password"
+                        >
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            id="showPassword"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                    @error('password')
+                        <small class="login-error-message">
+                            {{ $message }}
+                        </small>
+                    @enderror
+
+                </div>
+
+
+                <div class="login-remember">
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="remember"
+                            {{ old('remember') ? 'checked' : '' }}
+                        >
+
+                        Remember me
+                    </label>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    Sign In
+                </button>
+
+            </form>
+
+
+        
+
+        </div>
+
+    </div>
+
+</div>
+
 @endsection
