@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env(https://github.com/vinz-garcia/ANIMAL-ACCESS-VETERINARY-CLINIC-MANAGEMENT-SYSTEM.git)
+}
+
+enum Role {
+  CLIENT
+  STAFF
+  ADMIN
+}
+
+enum Species {
+  DOG
+  CAT
+  OTHER
+}
+
+enum Size {
+  SMALL
+  MEDIUM
+  LARGE
+  EXTRA_LARGE
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model User {
+  id           String        @id @default(uuid())
+  fullName     String
+  email        String        @unique
+  phone        String
+  passwordHash String
+  role         Role          @default(CLIENT)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  pets         Pet[]
+  appointments Appointment[] @relation("ClientAppointments")
+  groomings    Appointment[] @relation("GroomerAppointments")
+
+  @@map("users")
+}
+
+model Pet {
+  id               String        @id @default(uuid())
+  ownerId          String
+  name             String
+  breed            String
+  species          Species       @default(DOG)
+  size             Size          @default(MEDIUM)
+  temperamentNotes String?
+  vaccinationDone  Boolean       @default(false)
+  createdAt        DateTime      @default(now())
+
+  owner            User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  appointments     Appointment[]
+
+  @@map("pets")
+}
+
+model Service {
+  id              String        @id @default(uuid())
+  title           String
+  description     String?
+  durationMinutes Int
+  basePrice       Decimal       @db.Decimal(10, 2)
+
+  appointments    Appointment[]
+
+  @@map("services")
+}
+
+model Appointment {
+  id         String            @id @default(uuid())
+  clientId   String
+  petId      String
+  serviceId  String
+  groomerId  String?
+  startTime  DateTime
+  endTime    DateTime
+  status     AppointmentStatus @default(PENDING)
+  totalPrice Decimal           @db.Decimal(10, 2)
+  notes      String?
+  createdAt  DateTime          @default(now())
+
+  client     User              @relation("ClientAppointments", fields: [clientId], references: [id])
+  groomer    User?             @relation("GroomerAppointments", fields: [groomerId], references: [id])
+  pet        Pet               @relation(fields: [petId], references: [id])
+  service    Service           @relation(fields: [serviceId], references: [id])
+
+  @@map("appointments")
+}
