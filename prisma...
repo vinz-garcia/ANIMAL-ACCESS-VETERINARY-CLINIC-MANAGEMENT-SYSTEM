@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env(http://127.0.0.1:8000/login)
+  url      = env(https://github.com/vinz-garcia/ANIMAL-ACCESS-VETERINARY-CLINIC-MANAGEMENT-SYSTEM.git)
 }
 
 enum Role {
