@@ -129,6 +129,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/customers/{id}', [CustomerController::class, 'destroy'])
         ->name('customers.destroy');
 
+        Route::get('/customers/{id}/profile', [
+    CustomerController::class,
+    'profile'
+])->name('customers.profile');
+
 });
 
 
