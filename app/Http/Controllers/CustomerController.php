@@ -31,6 +31,32 @@ class CustomerController extends Controller
         return view('customers', compact('customers'));
     }
 
+    
+public function profile($id)
+{
+    $customer = Customer::findOrFail($id);
+
+    $pets = Pet::where(
+        'customer_name',
+        $customer->customer_name
+    )->get();
+
+    $appointments = Appointment::where(
+        'customer_name',
+        $customer->customer_name
+    )
+        ->orderByDesc('appointment_date')
+        ->orderByDesc('appointment_time')
+        ->get();
+
+    return response()->json([
+        'customer' => $customer,
+        'pets' => $pets,
+        'appointments' => $appointments,
+        'visit_count' => $appointments->count(),
+    ]);
+}
+
     public function store(Request $request)
     {
         $request->validate([
@@ -52,7 +78,7 @@ class CustomerController extends Controller
             ->with('success', 'Customer added successfully!');
     }
 
-    public function edit($id)
+    public function edit(int $id)
     {
         $customer = Customer::findOrFail($id);
 

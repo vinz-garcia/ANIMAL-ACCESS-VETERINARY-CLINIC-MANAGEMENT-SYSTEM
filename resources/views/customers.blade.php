@@ -255,30 +255,22 @@
            ACTIONS
         ========================= */
 
-        .customer-actions {
-            white-space: nowrap;
-        }
+        
+.profile-action {
+    border: none;
+    background: transparent;
+    color: #087f8c;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: none;
+}
 
-
-        .profile-action,
-        .customer-edit-action {
-            color: #087373;
-            font-size: 11px;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-
-        .profile-action:hover,
-        .customer-edit-action:hover {
-            text-decoration: underline;
-        }
-
-
-        .customer-action-divider {
-            margin: 0 7px;
-            color: #c7d1d1;
-        }
+.profile-action:hover {
+    color: #075e66;
+    text-decoration: underline;
+}
 
 
         /* =========================
@@ -303,6 +295,216 @@
             }
 
         }
+
+        /* CUSTOMER PROFILE MODAL */
+
+.customer-profile-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(13, 47, 47, 0.38);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+}
+
+.customer-profile-modal.show {
+    display: flex;
+}
+
+.customer-profile-content {
+    width: 100%;
+    max-width: 670px;
+    max-height: 85vh;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 40, 40, 0.2);
+}
+
+.customer-profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 24px;
+    border-bottom: 1px solid #edf1f1;
+}
+
+.customer-profile-header h2 {
+    margin: 0;
+    color: #183b3b;
+    font-size: 19px;
+}
+
+.customer-profile-header button {
+    border: none;
+    background: transparent;
+    color: #8a9999;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.customer-profile-body {
+    max-height: calc(85vh - 70px);
+    overflow-y: auto;
+    padding: 24px;
+}
+
+.customer-profile-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.customer-profile-avatar {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: #116f70;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.customer-profile-info h3 {
+    margin: 0 0 5px;
+    color: #183b3b;
+    font-size: 20px;
+}
+
+.customer-profile-info p {
+    margin: 3px 0;
+    color: #839292;
+    font-size: 12px;
+}
+
+.customer-profile-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.customer-profile-stat {
+    padding: 17px;
+    border-radius: 12px;
+    background: #f7f9fa;
+}
+
+.customer-profile-stat span,
+.customer-profile-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #8a9999;
+    font-size: 10px;
+    letter-spacing: 0.3px;
+}
+
+.customer-profile-stat strong {
+    color: #183b3b;
+    font-size: 16px;
+}
+
+.customer-profile-section {
+    margin-bottom: 22px;
+}
+
+.customer-profile-section > p {
+    margin: 0;
+    color: #344e4e;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.profile-pet-item,
+.profile-appointment-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 15px;
+    margin-top: 8px;
+    border: 1px solid #e9f0f0;
+    border-radius: 12px;
+}
+
+.profile-pet-item {
+    background: #eefafa;
+}
+
+.profile-pet-name,
+.profile-appointment-name {
+    color: #244444;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.profile-pet-detail,
+.profile-appointment-detail {
+    display: block;
+    margin-top: 4px;
+    color: #839292;
+    font-size: 11px;
+}
+
+.profile-status {
+    flex-shrink: 0;
+    padding: 5px 11px;
+    border-radius: 20px;
+    background: #d8f5f3;
+    color: #126767;
+    font-size: 10px;
+}
+
+.profile-empty {
+    padding: 16px;
+    color: #8a9999;
+    font-size: 12px;
+}
+
+.customer-profile-close-btn {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d9e5e5;
+    border-radius: 8px;
+    background: white;
+    color: #345050;
+    cursor: pointer;
+}
+
+.customer-profile-close-btn:hover {
+    background: #f6fafa;
+}
+
+@media (max-width: 600px) {
+    .customer-profile-modal {
+        padding: 12px;
+    }
+
+    .customer-profile-body {
+        padding: 18px;
+    }
+
+    .customer-profile-stats {
+        gap: 7px;
+    }
+
+    .customer-profile-stat {
+        padding: 12px 9px;
+    }
+
+    .customer-profile-stat strong {
+        font-size: 13px;
+    }
+}
 
     </style>
 
@@ -735,13 +937,13 @@
 
                                     <div class="customer-actions">
 
-
-                                        <a
-                                            href="{{ route('customers.edit', $customer->id) }}"
-                                            class="profile-action"
-                                        >
-                                            Profile
-                                        </a>
+<button
+    type="button"
+    class="profile-action"
+    data-customer-id="{{ $customer->id }}"
+>
+    Profile
+</button>
 
 
                                         <span class="customer-action-divider">
@@ -888,6 +1090,73 @@
 
     </div>
 
+    <!-- CUSTOMER PROFILE MODAL -->
+<div class="customer-profile-modal" id="customerProfileModal">
+    <div class="customer-profile-content">
+
+        <div class="customer-profile-header">
+            <h2>Client Profile</h2>
+            <button type="button" id="closeCustomerProfile" aria-label="Close">
+                &times;
+            </button>
+        </div>
+
+        <div class="customer-profile-body">
+
+            <div class="customer-profile-info">
+                <div class="customer-profile-avatar" id="profileAvatar">C</div>
+
+                <div>
+                    <h3 id="profileName">Customer Name</h3>
+                    <p id="profileEmail">Email address</p>
+                    <p id="profilePhone">Phone number</p>
+                </div>
+            </div>
+
+            <div class="customer-profile-stats">
+                <div class="customer-profile-stat">
+                    <span>MEMBER SINCE</span>
+                    <strong id="profileMemberSince">—</strong>
+                </div>
+
+                <div class="customer-profile-stat">
+                    <span>TOTAL VISITS</span>
+                    <strong id="profileVisits">0</strong>
+                </div>
+
+                <div class="customer-profile-stat">
+                    <span>PETS</span>
+                    <strong id="profilePetCount">0</strong>
+                </div>
+            </div>
+
+            <div class="customer-profile-section">
+                <span class="customer-profile-label">ADDRESS</span>
+                <p id="profileAddress">—</p>
+            </div>
+
+            <div class="customer-profile-section">
+                <span class="customer-profile-label">REGISTERED PETS</span>
+                <div id="profilePets"></div>
+            </div>
+
+            <div class="customer-profile-section">
+                <span class="customer-profile-label">APPOINTMENT HISTORY</span>
+                <div id="profileAppointments"></div>
+            </div>
+
+            <button
+                type="button"
+                class="customer-profile-close-btn"
+                id="closeCustomerProfileBottom"
+            >
+                Close
+            </button>
+
+        </div>
+    </div>
+</div>
+
 
 
     <!-- LOGOUT CONFIRMATION MODAL -->
@@ -956,6 +1225,202 @@
     <script>
 
         document.addEventListener('DOMContentLoaded', function () {
+
+/* =========================
+   CUSTOMER PROFILE MODAL
+========================= */
+
+const profileModal = document.getElementById('customerProfileModal');
+const closeProfileTop = document.getElementById('closeCustomerProfile');
+const closeProfileBottom = document.getElementById('closeCustomerProfileBottom');
+
+function closeCustomerProfile() {
+    if (profileModal) {
+        profileModal.classList.remove('show');
+    }
+}
+
+if (closeProfileTop) {
+    closeProfileTop.addEventListener('click', closeCustomerProfile);
+}
+
+if (closeProfileBottom) {
+    closeProfileBottom.addEventListener('click', closeCustomerProfile);
+}
+
+if (profileModal) {
+    profileModal.addEventListener('click', function (event) {
+        if (event.target === profileModal) {
+            closeCustomerProfile();
+        }
+    });
+}
+
+window.openCustomerProfile = async function (customerId) {
+    if (!profileModal) return;
+
+    const profileName = document.getElementById('profileName');
+    const profileEmail = document.getElementById('profileEmail');
+    const profilePhone = document.getElementById('profilePhone');
+    const profileAvatar = document.getElementById('profileAvatar');
+    const profileMemberSince = document.getElementById('profileMemberSince');
+    const profileVisits = document.getElementById('profileVisits');
+    const profilePetCount = document.getElementById('profilePetCount');
+    const profileAddress = document.getElementById('profileAddress');
+    const profilePets = document.getElementById('profilePets');
+    const profileAppointments = document.getElementById('profileAppointments');
+
+    profileModal.classList.add('show');
+
+    profileName.textContent = 'Loading...';
+    profileEmail.textContent = '';
+    profilePhone.textContent = '';
+    profilePets.innerHTML = '';
+    profileAppointments.innerHTML = '';
+
+    try {
+        const response = await fetch(`/customers/${customerId}/profile`, {
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Unable to load customer profile.');
+        }
+
+        const data = await response.json();
+        const customer = data.customer;
+
+        profileName.textContent = customer.customer_name || '—';
+        profileEmail.textContent = customer.email || 'No email provided';
+        profilePhone.textContent = customer.phone || 'No phone provided';
+        profileAvatar.textContent = (customer.customer_name || 'C').charAt(0).toUpperCase();
+
+        profileMemberSince.textContent = customer.created_at
+            ? new Date(customer.created_at).toLocaleDateString('en-US', {
+                month: 'short',
+                year: 'numeric',
+                timeZone: 'UTC'
+            })
+            : '—';
+
+        profileVisits.textContent = data.visit_count ?? 0;
+        profilePetCount.textContent = data.pets.length;
+        profileAddress.textContent = customer.address || 'No address provided';
+
+        if (data.pets.length) {
+          
+data.pets.forEach(pet => {
+    const item = document.createElement('div');
+    item.className = 'profile-pet-item';
+
+    const left = document.createElement('div');
+    left.className = 'profile-pet-left';
+
+    const emoji = document.createElement('span');
+    emoji.className = 'profile-pet-emoji';
+
+    const species = (pet.species || '').toLowerCase();
+
+    if (species.includes('cat')) {
+        emoji.textContent = '🐱';
+    } else if (species.includes('bird') || species.includes('parrot')) {
+        emoji.textContent = '🦜';
+    } else if (species.includes('rabbit')) {
+        emoji.textContent = '🐰';
+    } else if (species.includes('fish')) {
+        emoji.textContent = '🐠';
+    } else {
+        emoji.textContent = '🐶';
+    }
+
+    const details = document.createElement('div');
+
+    const name = document.createElement('div');
+    name.className = 'profile-pet-name';
+    name.textContent = pet.pet_name || 'Unnamed pet';
+
+    const detail = document.createElement('span');
+detail.className = 'profile-pet-detail';
+
+const ageText = pet.age !== null && pet.age !== ''
+    ? `${pet.age} years old`
+    : 'Age not specified';
+
+detail.textContent = [
+    pet.species,
+    pet.breed,
+    ageText
+].filter(Boolean).join(' · ');
+
+const health = document.createElement('span');
+health.className = 'profile-status';
+health.textContent = pet.status || 'Status not specified';
+
+details.append(name, detail, health);
+    details.append(name, detail);
+    left.append(emoji, details);
+    item.append(left);
+    profilePets.append(item);
+});
+        } else {
+            profilePets.innerHTML = '<div class="profile-empty">No registered pets.</div>';
+        }
+
+        
+if (data.appointments.length) {
+    data.appointments.forEach(appointment => {
+        const item = document.createElement('div');
+        item.className = 'profile-appointment-item';
+
+        const details = document.createElement('div');
+
+        const name = document.createElement('div');
+        name.className = 'profile-appointment-name';
+        name.textContent = appointment.service || 'Veterinary appointment';
+
+        const detail = document.createElement('span');
+        detail.className = 'profile-appointment-detail';
+
+        const date = appointment.appointment_date
+            ? new Date(appointment.appointment_date + 'T00:00:00')
+                .toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                })
+            : 'Date unavailable';
+
+        const time = appointment.appointment_time || '';
+
+        detail.textContent = [
+            appointment.pet_name || 'Pet not specified',
+            date,
+            time
+        ].filter(Boolean).join(' · ');
+
+        details.append(name, detail);
+
+        const status = document.createElement('span');
+        status.className = 'profile-status';
+        status.textContent = appointment.status || 'Scheduled';
+
+        item.append(details, status);
+        profileAppointments.append(item);
+    });
+} else {
+    profileAppointments.innerHTML =
+        '<div class="profile-empty">No appointment history.</div>';
+}
+    } catch (error) {
+        console.error(error);
+        profileName.textContent = 'Unable to load profile';
+        profilePets.innerHTML = '<div class="profile-empty">Please refresh and try again.</div>';
+        profileAppointments.innerHTML = '';
+    }
+};
 
 
             /* =========================
@@ -1104,6 +1569,13 @@
             }
 
         });
+
+        document.querySelectorAll('.profile-action[data-customer-id]').forEach(button => {
+    button.addEventListener('click', function () {
+        const customerId = this.dataset.customerId;
+        openCustomerProfile(customerId);
+    });
+});
 
     </script>
 
