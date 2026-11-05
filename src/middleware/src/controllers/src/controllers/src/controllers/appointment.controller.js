@@ -11,8 +11,9 @@ exports.getAvailableSlots = async (req, res) => {
     const service = await prisma.service.findUnique({ where: { id: serviceId } });
     if (!service) return res.status(404).json({ error: 'Service not found' });
 
-    const startOfDay = new Date(`${date}T00:00:00.000Z`);
-    const endOfDay = new Date(`${date}T23:59:59.999Z`);
+    const [year, month, day] = date.split('-').map(Number);
+    const startOfDay = new Date(year, month - 1, day, 9, 0, 0);
+    const endOfDay = new Date(year, month - 1, day, 23, 59, 59);
 
     const existingAppointments = await prisma.appointment.findMany({
       where: {
@@ -21,8 +22,8 @@ exports.getAvailableSlots = async (req, res) => {
       }
     });
 
-    const businessStart = new Date(`${date}T09:00:00.000Z`);
-    const businessEnd = new Date(`${date}T17:00:00.000Z`);
+    const businessStart = new Date(year, month -1, day, 9,0,0);
+    const businessEnd = new Date(year , month -1, day, 17,0,0);
 
     const availableSlots = [];
     let currentSlot = new Date(businessStart);
@@ -51,7 +52,7 @@ exports.getAvailableSlots = async (req, res) => {
 };
 
 exports.bookAppointment = async (req, res) => {
-  const { petId, serviceId, startTime, notes } = req.body;
+  const { petId, serviceId, startTime, notes } = Joi;
   const clientId = req.user.id;
 
   try {
@@ -80,7 +81,7 @@ exports.bookAppointment = async (req, res) => {
         serviceId,
         startTime: start,
         endTime: end,
-        totalPrice: service.basePrice,
+        totalPrice: Number(service.basePrice),
         notes,
         status: 'PENDING'
       }
@@ -94,7 +95,7 @@ exports.bookAppointment = async (req, res) => {
 
 exports.updateStatus = async (req, res) => {
   const { id } = req.params;
-  const { status } = req.body;
+  const { status } = Joi;
 
   try {
     const updated = await prisma.appointment.update({
